@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Continuous Assessment 1 - Exit Slip</title>
+  <style>
+    :root {
+      --uj-orange: #f06b1f;
+      --uj-maroon: #7a1832;
+      --uj-navy: #1f2f5e;
+      --ink: #1d2433;
+      --line: #d9deea;
+      --soft: #f5f7fc;
+      --white: #ffffff;
+      --success: #1f8f4e;
+      --shadow: 0 18px 42px rgba(23, 35, 74, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(240,107,31,0.18), transparent 26%),
+        radial-gradient(circle at top right, rgba(122,24,50,0.16), transparent 24%),
+        linear-gradient(135deg, #eef2ff 0%, #f7f9fd 42%, #eef4fb 100%);
+      padding: 28px;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--uj-navy) 0%, #2a4285 46%, var(--uj-maroon) 100%);
+      color: white;
+      padding: 28px 30px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+      opacity: 0.25;
+    }
+
+    .hero::before {
+      width: 220px;
+      height: 220px;
+      right: -55px;
+      top: -55px;
+      background: linear-gradient(135deg, var(--uj-orange), #ffbf87);
+    }
+
+    .hero::after {
+      width: 180px;
+      height: 180px;
+      left: -44px;
+      bottom: -60px;
+      background: linear-gradient(135deg, #fff2, #ffffff55);
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-badge {
+      width: 82px;
+      height: 82px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fff 0%, #ffe8d8 100%);
+      display: grid;
+      place-items: center;
+      color: var(--uj-maroon);
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,0.35), 0 10px 25px rgba(0,0,0,0.18);
+      flex: 0 0 auto;
+    }
+
+    .logo-badge svg { width: 56px; height: 56px; }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      font-size: 16px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.92);
+      max-width: 720px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .chip {
+      background: linear-gradient(180deg, #ffffff 0%, #f4f7fc 100%);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .chip .label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #5d6884;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .chip .value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--uj-navy);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: white;
+      margin-top: 12px;
+    }
+
+    thead th {
+      background: linear-gradient(135deg, var(--uj-maroon), var(--uj-navy));
+      color: white;
+      text-align: left;
+      padding: 15px 16px;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    tbody td {
+      padding: 15px 16px;
+      border-top: 1px solid #e7ebf5;
+      vertical-align: top;
+      background: #fff;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fbfcff;
+    }
+
+    .field-label {
+      font-weight: 700;
+      color: var(--uj-navy);
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: 1.6px solid #cfd7ea;
+      outline: none;
+      font-size: 16px;
+      background: #fbfcff;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--uj-orange);
+      box-shadow: 0 0 0 4px rgba(240,107,31,0.14);
+      background: #fff;
+    }
+
+    .declaration-box {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 14px 14px 12px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fff7f2 0%, #fff 100%);
+      border: 1px solid #f5d2bd;
+      line-height: 1.45;
+    }
+
+    .declaration-box input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--success);
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+
+    .integrity-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f3fbf6 0%, #ffffff 100%);
+      border: 1px solid #cfe8d6;
+      color: #1f5e38;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 12px 26px rgba(23, 35, 74, 0.14);
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .primary {
+      color: white;
+      background: linear-gradient(135deg, var(--uj-orange), #ff8f4c);
+    }
+
+    .secondary {
+      color: var(--uj-navy);
+      background: linear-gradient(135deg, #ffffff, #eef4ff);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .footer-small {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #66728f;
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 16px; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .hero-top { align-items: flex-start; }
+      table, thead, tbody, tr, td, th { display: block; }
+      thead { display: none; }
+      tbody td { border-top: 0; border-bottom: 1px solid #e7ebf5; }
+      tbody tr:last-child td:last-child { border-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="logo-badge" aria-hidden="true">
+          <svg viewBox="0 0 100 100" role="img" aria-label="University logo">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7a1832"/>
+                <stop offset="100%" stop-color="#f06b1f"/>
+              </linearGradient>
+            </defs>
+            <rect x="10" y="10" width="80" height="80" rx="18" fill="url(#g1)"/>
+            <path d="M30 30 v24 c0 12 8 18 20 24 c12-6 20-12 20-24 V30 Z" fill="#fff" opacity="0.96"/>
+            <path d="M39 42 h8 v18 c0 4 1 7 3 9 c2-2 3-5 3-9 V42 h8 v18 c0 8-4 14-11 19 c-7-5-11-11-11-19 Z" fill="#7a1832"/>
+          </svg>
+        </div>
+        <div>
+          <h1>CONTINUOUS ASSESSMENT 1 - EXIT SLIP</h1>
+          <p class="subtitle">Complete the form below, confirm your declaration, and download your PDF proof of completion for Moodle submission.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="meta-grid">
+        <div class="chip">
+          <span class="label">University</span>
+          <span class="value">University of Johannesburg</span>
+        </div>
+        <div class="chip">
+          <span class="label">Class activity date</span>
+          <span class="value">4 March 2026</span>
+        </div>
+        <div class="chip">
+          <span class="label">Computer time</span>
+          <span class="value" id="liveTime">Loading...</span>
+        </div>
+      </div>
+
+      <table aria-label="Exit slip capture table">
+        <thead>
+          <tr>
+            <th style="width: 32%;">Capture field</th>
+            <th>Student response</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-label">Your Surname</span></td>
+            <td><input type="text" id="surname" placeholder="Enter your surname" autocomplete="family-name" /></td>
+          </tr>
+          <tr>
+            <td><span class="field-label">Your Initials</span></td>
+            <td><input type="text" id="initials" placeholder="Enter your initials" autocomplete="additional-name" /></td>
+          </tr>
+          <tr>
+            <td><span class="field-label">Your Student Number</span></td>
+            <td><input type="text" id="studentNumber" placeholder="Enter your student number" inputmode="numeric" /></td>
+          </tr>
+          <tr>
+            <td><span class="field-label">Declaration</span></td>
+            <td>
+              <label class="declaration-box">
+                <input type="checkbox" id="declaration" />
+                <span>
+                  I declare that I have completed the class activities of 4 March 2026 as provided by my lecturer during the online class session.<br /><br />
+                  By checking the box I confirm that my information is true and valid under the scope of the University of Johannesburg and the used LMS.
+                </span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <div class="integrity-pill" aria-live="polite">
+        <span>PDF security marker:</span>
+        <span id="integrityStatus">Unique verification code will be added on download</span>
+      </div>
+
+      <div class="actions">
+        <button class="primary" type="button" id="downloadBtn">Download PDF</button>
+        <button class="secondary" type="button" id="resetBtn">Reset form</button>
+      </div>
+
+      <div class="footer-small">
+        This HTML file is self-contained and designed for Moodle upload. Your browser will save the PDF to its default download location.
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const liveTime = document.getElementById('liveTime');
+    const surnameEl = document.getElementById('surname');
+    const initialsEl = document.getElementById('initials');
+    const studentNumberEl = document.getElementById('studentNumber');
+    const declarationEl = document.getElementById('declaration');
+    const integrityStatusEl = document.getElementById('integrityStatus');
+
+    function formatNow(date = new Date()) {
+      try {
+        return new Intl.DateTimeFormat(undefined, {
+          year: 'numeric', month: 'long', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', second: '2-digit'
+        }).format(date);
+      } catch (e) {
+        return date.toLocaleString();
+      }
+    }
+
+    function updateClock() {
+      liveTime.textContent = formatNow(new Date());
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    function safe(str) {
+      return String(str || '').trim();
+    }
+
+    function pdfEscape(str) {
+      return String(str)
+        .replace(/\\/g, '\\\\')
+        .replace(/\(/g, '\\(')
+        .replace(/\)/g, '\\)')
+        .replace(/\r/g, '')
+        .replace(/\n/g, ' ');
+    }
+
+    function wrapText(text, maxChars) {
+      const words = String(text).split(/\s+/);
+      const lines = [];
+      let current = '';
+      words.forEach(word => {
+        const test = current ? current + ' ' + word : word;
+        if (test.length > maxChars) {
+          if (current) lines.push(current);
+          current = word;
+        } else {
+          current = test;
+        }
+      });
+      if (current) lines.push(current);
+      return lines;
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function cyrb53(str, seed = 0) {
+      let h1 = 0xdeadbeef ^ seed;
+      let h2 = 0x41c6ce57 ^ seed;
+      for (let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+      }
+      h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+      h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+      const part1 = (h2 >>> 0).toString(16).padStart(8, '0');
+      const part2 = (h1 >>> 0).toString(16).padStart(8, '0');
+      return (part1 + part2).toUpperCase();
+    }
+
+    async function buildIntegrityData(data) {
+      const generatedAt = new Date();
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local';
+      const payload = [
+        'CA1-EXIT-SLIP',
+        safe(data.surname).toUpperCase(),
+        safe(data.initials).toUpperCase(),
+        safe(data.studentNumber),
+        generatedAt.toISOString(),
+        String(new Date().getTimezoneOffset()),
+        timezone,
+        navigator.userAgent
+      ].join('|');
+      const fullHash = cyrb53(payload + '|' + payload.length) + cyrb53(payload.split('').reverse().join(''), 1);
+      const verificationCode = fullHash.slice(0, 24).match(/.{1,4}/g).join('-');
+      return {
+        generatedAt,
+        generatedAtDisplay: formatNow(generatedAt),
+        timezone,
+        fullHash,
+        verificationCode,
+        payload
+      };
+    }
+
+    function buildPdfContent(data) {
+      const lines = [];
+      const pageW = 595.28;
+      const pageH = 841.89;
+      const margin = 44;
+
+      function push(s) { lines.push(s); }
+      function rect(x, y, w, h, fillRGB, strokeRGB, lineWidth = 1) {
+        if (fillRGB) push(fillRGB + ' rg');
+        if (strokeRGB) push(strokeRGB + ' RG');
+        push(lineWidth + ' w');
+        push(`${x.toFixed(2)} ${y.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re ${fillRGB ? (strokeRGB ? 'B' : 'f') : 'S'}`);
+      }
+      function line(x1, y1, x2, y2, strokeRGB, lineWidth = 1) {
+        if (strokeRGB) push(strokeRGB + ' RG');
+        push(lineWidth + ' w');
+        push(`${x1.toFixed(2)} ${y1.toFixed(2)} m ${x2.toFixed(2)} ${y2.toFixed(2)} l S`);
+      }
+      function text(x, y, str, size = 12, rgb = '0 0 0', font = 'F1') {
+        push('BT');
+        push(`/${font} ${size} Tf`);
+        push(rgb + ' rg');
+        push(`${x.toFixed(2)} ${y.toFixed(2)} Td`);
+        push(`(${pdfEscape(str)}) Tj`);
+        push('ET');
+      }
+      function rotateText(x, y, angleDeg, str, size = 42, rgb = '0.90 0.92 0.97', font = 'F1') {
+        const rad = angleDeg * Math.PI / 180;
+        const a = Math.cos(rad).toFixed(5);
+        const b = Math.sin(rad).toFixed(5);
+        const c = (-Math.sin(rad)).toFixed(5);
+        const d = Math.cos(rad).toFixed(5);
+        push('BT');
+        push(`/${font} ${size} Tf`);
+        push(rgb + ' rg');
+        push(`${a} ${b} ${c} ${d} ${x.toFixed(2)} ${y.toFixed(2)} Tm`);
+        push(`(${pdfEscape(str)}) Tj`);
+        push('ET');
+      }
+
+      // Background
+      rect(0, 0, pageW, pageH, '0.98 0.98 1', null, 0);
+      rect(0, pageH - 145, pageW, 145, '0.12 0.18 0.37', null, 0);
+      rect(0, pageH - 145, pageW, 52, '0.48 0.09 0.20', null, 0);
+
+      // Watermark to discourage reuse
+      const watermark = `${safe(data.surname).toUpperCase()} ${safe(data.initials).toUpperCase()} ${safe(data.studentNumber)} • ${data.verificationCode}`;
+      rotateText(88, 290, 32, watermark, 24, '0.90 0.92 0.97');
+      rotateText(70, 420, 32, 'UNIVERSITY OF JOHANNESBURG - CA1 EXIT SLIP', 22, '0.93 0.94 0.98');
+
+      // Simple logo tile
+      rect(margin, pageH - 107, 58, 58, '1 0.95 0.90', '1 1 1', 1.2);
+      rect(margin + 6, pageH - 101, 46, 46, '0.48 0.09 0.20', null, 0);
+      text(margin + 17, pageH - 83, 'UJ', 22, '1 1 1');
+      text(margin + 74, pageH - 78, 'CONTINUOUS ASSESSMENT 1', 24, '1 1 1');
+      text(margin + 74, pageH - 106, 'EXIT SLIP', 24, '0.99 0.64 0.28');
+      text(margin, pageH - 132, 'University of Johannesburg', 11, '1 1 1');
+
+      // Card panel
+      const panelY = 138;
+      const panelH = 560;
+      rect(margin, panelY, pageW - margin * 2, panelH, '1 1 1', '0.84 0.87 0.93', 1);
+
+      text(margin + 18, panelY + panelH - 34, 'Submission details', 18, '0.12 0.18 0.37');
+      text(margin + 18, panelY + panelH - 54, 'The information below was captured from the Moodle HTML exit slip.', 10.5, '0.35 0.40 0.53');
+
+      const left = margin + 18;
+      const top = panelY + panelH - 88;
+      const tableW = pageW - (margin + 18) * 2;
+      const col1 = 165;
+      const rowHeights = [38, 42, 42, 42, 42, 130, 42, 42, 54];
+
+      // Header row
+      rect(left, top - rowHeights[0], tableW, rowHeights[0], '0.95 0.96 0.99', '0.82 0.86 0.93', 1);
+      line(left + col1, top, left + col1, top - rowHeights.reduce((a,b)=>a+b,0), '0.82 0.86 0.93', 1);
+      text(left + 10, top - 24, 'Field', 12, '0.12 0.18 0.37');
+      text(left + col1 + 10, top - 24, 'Student response', 12, '0.12 0.18 0.37');
+
+      const rows = [
+        ['Surname', data.surname],
+        ['Initials', data.initials],
+        ['Student number', data.studentNumber],
+        ['Declaration status', data.declared ? 'Checked - declaration confirmed' : 'Not checked'],
+        ['Declaration text', 'I declare that I have completed the class activities of 4 March 2026 as provided by my lecturer during the online class session. By checking the box I confirm that my information is true and valid under the scope of the University of Johannesburg and the used LMS.'],
+        ['Computer time', data.generatedAtDisplay],
+        ['Time zone', data.timezone],
+        ['Verification code', data.verificationCode]
+      ];
+
+      let currentTop = top - rowHeights[0];
+      rows.forEach((row, idx) => {
+        const h = rowHeights[idx + 1];
+        rect(left, currentTop - h, tableW, h, idx % 2 === 0 ? '1 1 1' : '0.987 0.99 1', '0.88 0.90 0.95', 1);
+        text(left + 10, currentTop - 20, row[0], 11.2, '0.12 0.18 0.37');
+        const wrapped = wrapText(row[1], row[0] === 'Declaration text' ? 52 : row[0] === 'Verification code' ? 32 : 42);
+        wrapped.forEach((ln, i) => {
+          text(left + col1 + 10, currentTop - 20 - (i * 14), ln, row[0] === 'Verification code' ? 10.2 : 10.8, '0.18 0.19 0.24');
+        });
+        currentTop -= h;
+      });
+
+      // Note / authenticity area
+      const noteY = 96;
+      rect(left, noteY, tableW, 68, '1 0.97 0.94', '0.95 0.83 0.72', 1);
+      text(left + 12, noteY + 46, 'Integrity marker', 13, '0.48 0.09 0.20');
+      const noteText = 'A unique verification code and student watermark were added when this PDF was generated. Any change to the visible details after download can invalidate the integrity marker. This improves verification, but it does not make the PDF completely tamper-proof.';
+      wrapText(noteText, 102).slice(0,3).forEach((ln, i) => text(left + 12, noteY + 28 - (i * 14), ln, 10.0, '0.30 0.30 0.36'));
+
+      // Footer
+      line(margin, 78, pageW - margin, 78, '0.80 0.84 0.91', 1);
+      text(margin, 58, 'Generated by Moodle HTML exit slip template', 10.5, '0.38 0.42 0.53');
+      text(pageW - 170, 58, 'Code: ' + data.fullHash.slice(0, 16), 9.5, '0.38 0.42 0.53');
+
+      return lines.join('\n');
+    }
+
+    function makePdf(data) {
+      const stream = buildPdfContent(data);
+      const streamBytes = new TextEncoder().encode(stream).length;
+      const objects = [];
+      objects.push('<< /Type /Catalog /Pages 2 0 R >>');
+      objects.push('<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+      objects.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>');
+      objects.push('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+      objects.push(`<< /Length ${streamBytes} >>\nstream\n${stream}\nendstream`);
+
+      let pdf = '%PDF-1.4\n';
+      const offsets = [0];
+      for (let i = 0; i < objects.length; i++) {
+        offsets.push(pdf.length);
+        pdf += `${i + 1} 0 obj\n${objects[i]}\nendobj\n`;
+      }
+      const xrefStart = pdf.length;
+      pdf += `xref\n0 ${objects.length + 1}\n`;
+      pdf += '0000000000 65535 f \n';
+      for (let i = 1; i < offsets.length; i++) {
+        pdf += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
+      }
+      pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
+      return new Blob([pdf], { type: 'application/pdf' });
+    }
+
+    function validate() {
+      const surname = safe(surnameEl.value);
+      const initials = safe(initialsEl.value);
+      const studentNumber = safe(studentNumberEl.value);
+      const declared = declarationEl.checked;
+      if (!surname || !initials || !studentNumber) {
+        alert('Please complete your surname, initials, and student number before downloading the PDF.');
+        return null;
+      }
+      if (!declared) {
+        alert('Please check the declaration box before downloading the PDF.');
+        return null;
+      }
+      return { surname, initials, studentNumber, declared };
+    }
+
+    async function refreshIntegrityPreview() {
+      const surname = safe(surnameEl.value);
+      const initials = safe(initialsEl.value);
+      const studentNumber = safe(studentNumberEl.value);
+      if (!surname || !initials || !studentNumber) {
+        integrityStatusEl.textContent = 'Unique verification code will be added on download';
+        return;
+      }
+      const previewData = await buildIntegrityData({ surname, initials, studentNumber, declared: declarationEl.checked });
+      integrityStatusEl.textContent = previewData.verificationCode;
+    }
+
+    [surnameEl, initialsEl, studentNumberEl].forEach(el => el.addEventListener('input', refreshIntegrityPreview));
+
+    document.getElementById('downloadBtn').addEventListener('click', async () => {
+      const data = validate();
+      if (!data) return;
+      const integrity = await buildIntegrityData(data);
+      const finalData = { ...data, ...integrity };
+      const blob = makePdf(finalData);
+      const now = integrity.generatedAt;
+      const fileName = `CA1_Exit_Slip_${data.studentNumber}_${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}_${integrity.verificationCode.replace(/-/g, '')}.pdf`;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      surnameEl.value = '';
+      initialsEl.value = '';
+      studentNumberEl.value = '';
+      declarationEl.checked = false;
+      integrityStatusEl.textContent = 'Unique verification code will be added on download';
+      surnameEl.focus();
+    });
+  </script>
+</body>
+</html>
